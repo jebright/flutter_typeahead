@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
+
 import 'service_result.dart';
 import 'service_state.dart';
 
@@ -21,10 +22,14 @@ class Search<T> {
         .distinct() //only care if T has changed
         // Wait for the user to stop typing for 250ms before running a search
         .debounce(const Duration(
-            milliseconds: 500)) //delay of 500ms must occur before we go forward
+            milliseconds: 500))
         .switchMap(_searchMap())
         // The initial state to deliver to the screen.
-        .startWith(new ServiceState.initial());
+        .startWith(new ServiceState.initial());        
+  }
+
+  void close() {
+    onTextChanged.close();
   }
 
   Stream<ServiceState> Function(String) _searchMap() {
@@ -43,4 +48,5 @@ class Search<T> {
           .startWith(new ServiceState.processing());
     };
   }
+  
 }

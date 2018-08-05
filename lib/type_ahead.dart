@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 import 'search.dart';
 import 'service_state.dart';
 
 class TypeAhead<T> extends StatelessWidget {
   final Search<T> search;
-  //final SearchApi<T> api;
+  final SearchApi<T> api;
 
-  TypeAhead({
-    Key key,
-    @required this.search,
-  }) : super(key: key) {
-   // _search = new Search(api);
-  }
+  TypeAhead(this.api) : search = new Search(api);
 
   Widget buildState(ServiceState serviceState) {
     if(serviceState.isProcessing)
@@ -59,54 +53,7 @@ class TypeAhead<T> extends StatelessWidget {
             )
           ]);
         });
-
-    /*
-          body: new Stack(
-            children: <Widget>[
-              new Flex(direction: Axis.vertical, children: <Widget>[
-                new Container(
-                  padding: new EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 4.0),
-                  child: new TextField(
-                    decoration: new InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Search...',
-                    ),
-                    style: new TextStyle(
-                      fontSize: 36.0,
-                      fontFamily: "Hind",
-                      decoration: TextDecoration.none,
-                    ),
-                    onChanged: (String s) => search.onTextChanged.add(s),
-                  ),
-                ),
-                new Expanded(
-                  child: new Stack(
-                    children: <Widget>[
-                      // // Fade in an intro screen if no term has been entered
-                      // new SearchIntroWidget(model.result?.isNoTerm ?? false),
-
-                      // // Fade in an Empty Result screen if the search contained
-                      // // no items
-                      // new EmptyResultWidget(model.result?.isEmpty ?? false),
-
-                      // // Fade in a loading screen when results are being fetched
-                      // // from Github
-                      // new SearchLoadingWidget(model.isLoading ?? false),
-
-                      // // Fade in an error if something went wrong when fetching
-                      // // the results
-                      // new SearchErrorWidget(model.hasError ?? false),
-
-                      // // Fade in the Result if available
-                      // new SearchResultWidget(model.result),
-                    ],
-                  ),
-                )
-              ])
-            ],
-          ),
-      },
-    );*/
   }
+  
 }
 

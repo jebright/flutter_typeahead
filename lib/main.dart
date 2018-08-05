@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'type_ahead.dart';
 import 'sample_api.dart';
-import 'search.dart';
 
 void main() => runApp(new MyApp());
 
@@ -30,11 +30,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   SampleApi api;
-  Search search;
+  //Search search;
 
   _MyHomePageState() {
     api = new SampleApi<String>();
-    search = new Search(api);
   }
 
   @override
@@ -45,8 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: new Column(
         children: <Widget>[
-          //new TypeAhead(api: api),
-          new TypeAhead(search: search),
+          new TypeAhead(api),
         ],
       ),
     );
